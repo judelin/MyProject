@@ -1,0 +1,111 @@
+ body{ 
+   background-image: url(image/image2.jpg);
+    background-repeat:no-repeat;
+     background-size:cover;
+     opacity:0.6;
+    
+ }
+.container{
+  background:black;
+}
+ .hea{
+
+  text-align: center;
+  color:white;
+ }
+ main{
+  
+    padding-bottom:37%;
+ }
+.footer {
+
+ background-image: url(image/image5.jpg);
+
+   
+  color: white;
+  text-align: center;
+
+}
+
+
+.navaB{
+ 
+  background-image: url(image/image5.jpg);
+  
+ 
+}
+.centAl{
+
+ padding-top: 15%;
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+#grad {
+  background-image: radial-gradient(red, yellow, green);
+}
+#dataIn{
+ 
+}
+.log{
+  padding-top: 5%;
+  text-align: center;
+}
+
+.dataI{
+  padding-top:5%;
+}
+a{
+  color:white;
+}
+.nav-item{
+  color:white;
+}
+th,td{
+  color: white;
+}
+#id,#idi{
+  color: white;
+
+
+}
+
+.tabi{
+ font-size: 90%;
+}
+
+#menu{
+  position: relative;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
