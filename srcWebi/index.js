@@ -751,6 +751,7 @@ $(document).ready( async function() {
   Organ();
      if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
         returnNom();
+		 nomOrgan();
            }
       else{}
   //tabb();
@@ -758,7 +759,7 @@ $(document).ready( async function() {
   //console.log(removeDuplicatess(getDuplicates(a)));
   //console.log("true "+contract_org.options.address)
   //elementTrouver(contract_org.options.address).then(result=>{console.log(result)});
-  nomOrgan();
+  //nomOrgan();
   verifierHash();
   AppVerifier();
   
