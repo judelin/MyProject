@@ -3,7 +3,6 @@ import Organisation from './Organisations/build/contracts/Organisation';
 import './index.css';
 
 
-
 var web3;
 var contract;
 var contract_org;
@@ -174,7 +173,7 @@ async function verifierOrgg(address,chaine){
   'ajouterOrganEven',
   {
    filter: {"nom":chaine},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'
     }
   );
@@ -183,7 +182,7 @@ async function verifierOrgg(address,chaine){
   'ajouterOrganEven',
   {
    filter: {"orga":address},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'
     }
   );
@@ -215,7 +214,7 @@ async function verifierOrgExist(address){
   'ajouterOrganEven',
   {
     filter: {"pub":address},
-    fromBlock:5430,
+    fromBlock:8037341,
     //toBlock:'latest'
     }
   );
@@ -270,7 +269,7 @@ async function verifierEnlevParAd(ind){
 
   var resultat=await contract.getPastEvents('ajouterOrganEven',{
     filter: {"etat":[1]},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'});
 
    for(var i=0; i<resultat.length; i++){
@@ -287,7 +286,7 @@ async function verifierEnlevParAd(ind){
 
   var resultatt=await contract.getPastEvents('enleverOrganEven',{
     filter: {"etat":[0]},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'});
 
   for(var i=0; i<resultatt.length; i++){
@@ -302,24 +301,20 @@ async function verifierEnlevParAd(ind){
   }
    }
 
-    //console.log("ajout "+resultat.length);
-    //console.log("enl "+resultatt.length);
-
+  
     difference=mergeTab(tab,tab1);
     var tab2=removeDuplicatess(getDuplicates(tab))
     var tab3=removeDuplicatess(getDuplicates(tab1))
    
     difference1=removeDuplicatess(tab2.concat(tab3));
-    //console.log(getDuplicates(tab));
-    //console.log(getDuplicates(tab1));
-    //console.log(difference1);
+  
    if(getDuplicates(tab).length==getDuplicates(tab1).length){
     concat_difference= difference;
   }
   else{
     concat_difference= difference.concat(difference1);
   }
-  //console.log(concat_difference);
+ 
    return concat_difference;
 }
 
@@ -344,7 +339,7 @@ function nomOrgan(){
   'ajouterOrganEven',
   {
     filter: {"pub":account[0]},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'
     }
   ).then(results=>{
@@ -369,7 +364,7 @@ async function verifierDocc(hashi){
   'ajouteDocEvent',
   {
     filter: {"hash": hashi},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'
     }
   );
@@ -401,10 +396,9 @@ async function resultatHash(){
         contract_org.options.jsonInterface;
    var resultatt=await contract_org.getPastEvents('ajouteDocEvent',{
     //filter: {"organisa": account,"etatDoc":[1,0]},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'});
    
-    //console.log(resultatt.length);
     var table = '<table class="table"> <thead><tr><th scope="col">#</th><th scope="col">Hash</th></tr></thead><tbody>';
     for(var i=0; i<resultatt.length; i++){
       enregis=await verifierDocc(resultatt[i].returnValues.hash);
@@ -441,7 +435,7 @@ async function histo(){
   var enregis;
   var results=await contract.getPastEvents('ajouterOrganEven',{
     //filter: {"pub":address},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'});
     var resultss=await verifierEnlevParAd(2);
     var result=await verifierEnlevParAd(0);
@@ -459,7 +453,7 @@ async function histo(){
         contract_org.options.jsonInterface;
        var resultat= await contract_org.getPastEvents('ajouteDocEvent',{
         //filter: {"organisa": account,"etatDoc":[1,0]},
-        fromBlock:5430,
+        fromBlock:8037341,
         toBlock:'latest'});
         //console.log(resultat);
        
@@ -490,11 +484,10 @@ function returnNom(){
   'ajouterOrganEven',
   {
     filter: {"pub":account[0]},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'
     }
   ).then(results=>{
-
 
   if(results.length!=0){
       elementTrouver(results[0].returnValues.orga).then(result=>{
@@ -757,11 +750,6 @@ $(document).ready( async function() {
 		 
            }
       else{}
-  //tabb();
-  var a= [5, 2, 9, 4];
-  //console.log(removeDuplicatess(getDuplicates(a)));
-  //console.log("true "+contract_org.options.address)
-  //elementTrouver(contract_org.options.address).then(result=>{console.log(result)});
   //nomOrgan();
   verifierHash();
   AppVerifier();
