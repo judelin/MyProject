@@ -2,6 +2,8 @@ import Autorite from './Autorite/build/contracts/Autorite';
 import Organisation from './Organisations/build/contracts/Organisation';
 import './index.css';
 
+
+
 var web3;
 var contract;
 var contract_org;
@@ -99,7 +101,7 @@ function initWeb3(){
   } 
     else {
     // We are on the server *OR* the user is not running metamask
-    var provider = new Web3.providers.HttpProvider("wss://ropsten.infura.io/ws/v3/a5fe3a17977643a1aa5ad75a539c31ee");
+    var provider = new Web3.providers.HttpProvider("http://localhost:7545");
     web3 = new Web3(provider);
   //}
  //window.ethereum.enable();
@@ -144,8 +146,13 @@ function initialiserContractAutorite(documentContrat,id) {
 }
 
 async function verifNom(org,nom){
-  var verif=await retournNom();
-  var verifOr=await verifierEnlevParAd();
+
+   var verif=await verifierEnlevParAd(2);
+   //console.log(verif);
+  var verifOr=await verifierEnlevParAd(0);
+   //console.log(verifOr);
+   var ad=contract_org.options.address;//await contract.methods.retournerAdresse("universite laval").call();
+   //console.log(ad);
   var enregis=false
 
   for(var i=0; i<verif.length; i++){
@@ -166,7 +173,7 @@ async function verifierOrgg(address,chaine){
   'ajouterOrganEven',
   {
    filter: {"nom":chaine},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'
     }
   );
@@ -175,7 +182,7 @@ async function verifierOrgg(address,chaine){
   'ajouterOrganEven',
   {
    filter: {"orga":address},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'
     }
   );
@@ -188,7 +195,7 @@ async function verifierOrgg(address,chaine){
     enregis=false;
   }
   else if(await verifNom(address,chaine)==false){
-    console.log(chaine)
+    //console.log(chaine)
     enregis=false;
 
   }
@@ -207,12 +214,12 @@ async function verifierOrgExist(address){
   'ajouterOrganEven',
   {
     filter: {"pub":address},
-    fromBlock:8037342,
+    fromBlock:5430,
     //toBlock:'latest'
     }
   );
     var account=await web3.eth.getAccounts();
-
+  //console.log(account[0])
   var ret=await contract.methods.retournerAdresse(account[0]).call();
   var elem=await elementTrouver(ret);
   //console.log("res"+ret);
@@ -252,17 +259,17 @@ function mergeTab(tab,tab1){
 
 async function verifierEnlevParAd(ind){
   var concat_difference;
-   var difference1;
-   var difference;
+  var difference1;
+  var difference;
   var tab=[];
   var tab1=[];
   var tab2=[];
   var tab3=[];
   var account= await web3.eth.getAccounts();
 
-   var resultat=await contract.getPastEvents('ajouterOrganEven',{
+  var resultat=await contract.getPastEvents('ajouterOrganEven',{
     filter: {"etat":[1]},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'});
 
    for(var i=0; i<resultat.length; i++){
@@ -279,7 +286,7 @@ async function verifierEnlevParAd(ind){
 
   var resultatt=await contract.getPastEvents('enleverOrganEven',{
     filter: {"etat":[0]},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'});
 
   for(var i=0; i<resultatt.length; i++){
@@ -294,19 +301,24 @@ async function verifierEnlevParAd(ind){
   }
    }
 
-     difference=mergeTab(tab,tab1);
+    //console.log("ajout "+resultat.length);
+    //console.log("enl "+resultatt.length);
+
+    difference=mergeTab(tab,tab1);
     var tab2=removeDuplicatess(getDuplicates(tab))
     var tab3=removeDuplicatess(getDuplicates(tab1))
    
-    difference1=removeDuplicatess(getDuplicates(tab2.concat(tab3)));
-
+    difference1=removeDuplicatess(tab2.concat(tab3));
+    //console.log(getDuplicates(tab));
+    //console.log(getDuplicates(tab1));
+    //console.log(difference1);
    if(getDuplicates(tab).length==getDuplicates(tab1).length){
     concat_difference= difference;
   }
   else{
     concat_difference= difference.concat(difference1);
   }
-   //console.log(concat_difference);
+  //console.log(concat_difference);
    return concat_difference;
 }
 
@@ -331,7 +343,7 @@ function nomOrgan(){
   'ajouterOrganEven',
   {
     filter: {"pub":account[0]},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'
     }
   ).then(results=>{
@@ -356,7 +368,7 @@ async function verifierDocc(hashi){
   'ajouteDocEvent',
   {
     filter: {"hash": hashi},
-    fromBlock:8037341,
+    fromBlock:5430,
     toBlock:'latest'
     }
   );
@@ -388,7 +400,7 @@ async function resultatHash(){
         contract_org.options.jsonInterface;
    var resultatt=await contract_org.getPastEvents('ajouteDocEvent',{
     //filter: {"organisa": account,"etatDoc":[1,0]},
-    fromBlock:8037341,
+    fromBlock:5430,
     toBlock:'latest'});
    
     //console.log(resultatt.length);
@@ -428,7 +440,7 @@ async function histo(){
   var enregis;
   var results=await contract.getPastEvents('ajouterOrganEven',{
     //filter: {"pub":address},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'});
     var resultss=await verifierEnlevParAd(2);
     var result=await verifierEnlevParAd(0);
@@ -446,7 +458,7 @@ async function histo(){
         contract_org.options.jsonInterface;
        var resultat= await contract_org.getPastEvents('ajouteDocEvent',{
         //filter: {"organisa": account,"etatDoc":[1,0]},
-        fromBlock:8037341,
+        fromBlock:5430,
         toBlock:'latest'});
         //console.log(resultat);
        
@@ -477,18 +489,23 @@ function returnNom(){
   'ajouterOrganEven',
   {
     filter: {"pub":account[0]},
-    fromBlock:8037342,
+    fromBlock:5430,
     toBlock:'latest'
     }
   ).then(results=>{
 
-  
+
   if(results.length!=0){
+      elementTrouver(results[0].returnValues.orga).then(result=>{
+        if(result==true){
       $("#idi").html('<span id="id"><strong>'+results[0].returnValues.nom.toUpperCase()+'</strong></span> ');
+   }
+   })
    }
   
   });
 })
+
 }
 /****************************************************************************************************/
 
@@ -587,7 +604,9 @@ var nom_orga = $("#nom_org").val();
             from:account[0],
             //gas:200000
           }).then(result=>{
-            console.log("organisation enlevée");
+            $("#enlev").hide();
+             $('#enlData').load('inscription.html',function(){});
+           // console.log("organisation enlevée");
          })
       })
     });
