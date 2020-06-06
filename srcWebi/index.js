@@ -1,5 +1,5 @@
-import Autorite from './Autorite/build/contracts/Autorite';
-import Organisation from './Organisations/build/contracts/Organisation';
+import Autorite from 'MyProject/Autorite/build/contracts/Autorite';
+import Organisation from 'MyProject/Organisations/build/contracts/Organisation';
 
 
 import './index.css';
