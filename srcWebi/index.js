@@ -1,5 +1,5 @@
-//import Autorite from 'C:/Users/judelin/Desktop/ProjetIft/Autorite/build/contracts/Autorite';
-//import Organisation from 'C:/Users/judelin/Desktop/ProjetIft/Organisations/build/contracts/Organisation';
+import Autorite from './Autorite/build/contracts/Autorite';
+import Organisation from './Organisations/build/contracts/Organisation';
 
 
 import './index.css';
@@ -101,7 +101,7 @@ function initWeb3(){
   } 
     else {
     // We are on the server *OR* the user is not running metamask
-    var provider = new Web3.providers.HttpProvider("http://localhost:7545");
+    var provider = new Web3.providers.HttpProvider("wss://ropsten.infura.io/ws/v3/a5fe3a17977643a1aa5ad75a539c31ee");
     web3 = new Web3(provider);
   //}
  //window.ethereum.enable();
@@ -168,7 +168,7 @@ async function verifierOrgg(address,chaine){
   'ajouterOrganEven',
   {
    filter: {"nom":chaine},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'
     }
   );
@@ -177,7 +177,7 @@ async function verifierOrgg(address,chaine){
   'ajouterOrganEven',
   {
    filter: {"orga":address},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'
     }
   );
@@ -209,7 +209,7 @@ async function verifierOrgExist(address){
   'ajouterOrganEven',
   {
     filter: {"pub":address},
-    fromBlock:5430,
+    fromBlock:8037342,
     //toBlock:'latest'
     }
   );
@@ -264,7 +264,7 @@ async function verifierEnlevParAd(ind){
 
    var resultat=await contract.getPastEvents('ajouterOrganEven',{
     filter: {"etat":[1]},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'});
 
    for(var i=0; i<resultat.length; i++){
@@ -281,7 +281,7 @@ async function verifierEnlevParAd(ind){
 
   var resultatt=await contract.getPastEvents('enleverOrganEven',{
     filter: {"etat":[0]},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'});
 
   for(var i=0; i<resultatt.length; i++){
@@ -333,7 +333,7 @@ function nomOrgan(){
   'ajouterOrganEven',
   {
     filter: {"pub":account[0]},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'
     }
   ).then(results=>{
@@ -358,7 +358,7 @@ async function verifierDocc(hashi){
   'ajouteDocEvent',
   {
     filter: {"hash": hashi},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'
     }
   );
@@ -390,7 +390,7 @@ async function resultatHash(){
         contract_org.options.jsonInterface;
    var resultatt=await contract_org.getPastEvents('ajouteDocEvent',{
     //filter: {"organisa": account,"etatDoc":[1,0]},
-    fromBlock:5430,
+    fromBlock:8037341,
     toBlock:'latest'});
    
     //console.log(resultatt.length);
@@ -430,7 +430,7 @@ async function histo(){
   var enregis;
   var results=await contract.getPastEvents('ajouterOrganEven',{
     //filter: {"pub":address},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'});
     var resultss=await verifierEnlevParAd(2);
     var result=await verifierEnlevParAd(0);
@@ -448,7 +448,7 @@ async function histo(){
         contract_org.options.jsonInterface;
        var resultat= await contract_org.getPastEvents('ajouteDocEvent',{
         //filter: {"organisa": account,"etatDoc":[1,0]},
-        fromBlock:5430,
+        fromBlock:8037341,
         toBlock:'latest'});
         //console.log(resultat);
        
@@ -479,7 +479,7 @@ function returnNom(){
   'ajouterOrganEven',
   {
     filter: {"pub":account[0]},
-    fromBlock:5430,
+    fromBlock:8037342,
     toBlock:'latest'
     }
   ).then(results=>{
@@ -727,13 +727,13 @@ function AppVerifier(){
 $(document).ready( async function() {
  
   initWeb3();
-  //init();
+  init();
 
-  //AppAutorite();
+  AppAutorite();
   
-  //Organ();
+  Organ();
      if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
-        //returnNom();
+        returnNom();
            }
       else{}
   //tabb();
@@ -741,8 +741,8 @@ $(document).ready( async function() {
   //console.log(removeDuplicatess(getDuplicates(a)));
   //console.log("true "+contract_org.options.address)
   //elementTrouver(contract_org.options.address).then(result=>{console.log(result)});
-  //nomOrgan();
- // verifierHash();
- // AppVerifier();
+  nomOrgan();
+  verifierHash();
+  AppVerifier();
   
 });
