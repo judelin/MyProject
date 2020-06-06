@@ -101,7 +101,7 @@ function initWeb3(){
   } 
     else {
     // We are on the server *OR* the user is not running metamask
-    var provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/a5fe3a17977643a1aa5ad75a539c31ee");
+    var provider = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/a5fe3a17977643a1aa5ad75a539c31ee");
     web3 = new Web3(provider);
   //}
  //window.ethereum.enable();
