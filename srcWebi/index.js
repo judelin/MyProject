@@ -747,12 +747,14 @@ $(document).ready( async function() {
   initWeb3();
   init();
 
-  AppAutorite();
-  
-  Organ();
+ 
      if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
+		  AppAutorite();
+  
+        Organ();
         returnNom();
 		 nomOrgan();
+		 
            }
       else{}
   //tabb();
