@@ -650,7 +650,7 @@ function Organ(){
           contract_org.methods.ajouterDoc(docum
             ).send({
               from:account[0],
-              gas:60000
+              //gas:150000
             }).then(result=>{
               //console.log("document ajouté");
               $("#aler").html('<p class="alert alert-success">'+
