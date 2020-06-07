@@ -1,3 +1,4 @@
+//Auteur Judelin Seide
 import Autorite from './Autorite/build/contracts/Autorite';
 import Organisation from './Organisations/build/contracts/Organisation';
 import './index.css';
@@ -489,6 +490,7 @@ function returnNom(account){
   ).then(results=>{
 
   if(results.length!=0){
+	   console.log(results[0].returnValues.orga);
       elementTrouver(results[0].returnValues.orga).then(result=>{
         if(result==true){
       $("#idi").html('<span id="id"><strong>'+results[0].returnValues.nom.toUpperCase()+'</strong></span> ');
