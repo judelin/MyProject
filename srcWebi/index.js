@@ -424,7 +424,6 @@ async function elementTrouver(elem){
   for(var i=0; i<resul.length; i++){
     if(resul[i]==elem){
       enregis=true;
-      //console.log("vrai "+enregis)
       break;
     }
   }
@@ -477,13 +476,13 @@ async function histo(){
 }
 
 
-function returnNom(){
+function returnNom(account){
  
- web3.eth.getAccounts().then(account=>{
+
    contract.getPastEvents(
   'ajouterOrganEven',
   {
-    filter: {"pub":account[0]},
+    filter: {"pub":account},
     fromBlock:8037341,
     toBlock:'latest'
     }
@@ -498,7 +497,7 @@ function returnNom(){
    }
   
   });
-})
+
 
 }
 /****************************************************************************************************/
@@ -745,7 +744,9 @@ $(document).ready( async function() {
 	
   
         Organ();
-        returnNom();
+         web3.eth.getAccounts().then(account=>{
+        returnNom(account);
+      });
 		 nomOrgan();
 		 
            }
