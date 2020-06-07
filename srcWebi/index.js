@@ -744,7 +744,6 @@ $(document).ready( async function() {
  
      if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
 	
-  
         Organ();
          web3.eth.getAccounts().then(account=>{
         returnNom(account);

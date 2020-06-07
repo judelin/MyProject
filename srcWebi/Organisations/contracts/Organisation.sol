@@ -32,7 +32,7 @@ contract Organisation{
      }
      
     function enleverDoc(bytes32 hash) external {// require non organisation de preference
-       // require(org_adr==msg.sender,"Vous n'etes pas le proprietaires");
+        require(org_adr==msg.sender,"Vous n'etes pas le proprietaires");
         require(docums[hash]==true,"Document existe deja");
         etat=0;
         delete docums[hash];
