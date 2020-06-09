@@ -5,9 +5,6 @@ var b=$("#salut").html('<nav class="navbar navbar-expand-sm navaB navbar-dark ju
       '<a class="nav-link" href="index.html">Accueil</a>'+
     '</li>'+
     '<li class="nav-item">'+
-    '<a class="nav-link" href="#">Apropos</a>'+
-    '</li>'+
-    '<li class="nav-item">'+
       '<a class="nav-link" href="check.html">Verifier</a>'+
     
   '</ul>'+
