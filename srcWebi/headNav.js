@@ -22,7 +22,6 @@ var c=$("#foot").html(
 '<a href="index.html">Accueil</a><br>'+
 '<a href="check.html">Verifier</a><br>'+
 '<a href="login.html">Login</a><br>'+
-'<a href="#">Apropos</a><br>'+
  
 '<small><i>Copyright &copy; 2020 Authenticité document</i></small>'+
     '<small><i><br/>'+
